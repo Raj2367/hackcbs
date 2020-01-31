@@ -1,26 +1,19 @@
 {
-  "name": "d_ola",
+  "name": "Utkal_hack",
   "version": "1.0.0",
-  "description": "Decentralise Ola like Cab booking system",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
     "dev": "node server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Raj2367/d_ola.git"
-  },
-  "author": "Pruthwiraj Nayak",
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Raj2367/d_ola/issues"
-  },
-  "homepage": "https://github.com/Raj2367/d_ola#readme",
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.8.0",
+    "firebase": "^7.7.0",
     "fs-extra": "^7.0.1",
     "ganache-cli": "^6.4.3",
     "google-maps-react": "^2.0.2",
@@ -31,6 +24,7 @@
     "react-bootstrap": "^1.0.0-beta.8",
     "react-chartjs-2": "^2.7.6",
     "react-dom": "^16.8.6",
+    "react-to-print": "^2.5.1",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.86.0",
     "solc": "^0.4.25",

@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import { Card, Button, Input, Form ,Grid, Header, Dimmer, Loader} from 'semantic-ui-react';
+import { Card, Button, Input, Form ,Grid, Header, Dimmer, Loader, Icon} from 'semantic-ui-react';
 import Campaign from '../ethereum/patient';
-import factory from '../ethereum/factory';
 import Layout from '../components/Layout';
-import { Link } from '../routes';
 import web3 from '../ethereum/web3';
 import { Router } from '../routes';
+import firebase from 'firebase';
+import {DB_CONFIG} from './Config';
+
 
 class Comments extends Component
 {
     static async getInitialProps(props) {
         
         const { address } = props.query;
-        console.log(address);
 
         const campaign = Campaign(address);
 
@@ -31,17 +31,40 @@ class Comments extends Component
 
     constructor(props) {
         super(props);
-        this.state = {value: '', loading: false};
-    
+        this.state = {value: '', doctor:'', hospital:'',loading: false};
         
-        this.handleChange = this.handleChange.bind(this);
+        firebase.database().ref().update({"value":" "});
+        this.handleChange1 = this.handleChange1.bind(this);
+        this.handleChange2 = this.handleChange2.bind(this);
+        this.handleChange3 = this.handleChange3.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-      handleChange(event) {
+    
+  componentDidMount()
+  {
+   
+    firebase.database().ref().child('value').on('value',snap =>{
+      this.setState({
+        doctor: snap.val()
+      });
+      var uid = this.state.doctor.substring(this.state.doctor.indexOf("name=\""),this.state.doctor.indexOf("\" gender="));
+      var uid2=uid.substring(6);
+      
+      this.setState({doctor:uid2});
+    });
+  }
+
+
+      handleChange1(event) {
         this.setState({value: event.target.value});
       }
-      
+      handleChange2(event) {
+        this.setState({doctor: event.target.value});
+      }
+      handleChange3(event) {
+        this.setState({hospital: event.target.value});
+      }
       handleSubmit = async (event) => {
         const comment = this.state.value;
         const account = await web3.eth.getAccounts();
@@ -53,7 +76,7 @@ class Comments extends Component
             let d = new Date();
             
             const newPat = await campaign.methods
-            .createPatientHistory(this.state.value,d+'')
+            .createPatientHistory(this.state.value,d+'',this.state.doctor,this.state.hospital)
             .send({
                 from: account[0]
             });
@@ -71,18 +94,31 @@ class Comments extends Component
         return this.props.requests.map((request, index) => {
             return (
                 <Grid>
-                    
-                    <Grid.Column width={5}>
+                    <Grid.Column width={4}>
                         <h6>
                         <span key = {index}
                         id = {index}>{request.tme} :- </span></h6>
                     </Grid.Column>
                     
-                    <Grid.Column width={5}>
+                    <Grid.Column width={4}>
                         <h6>
                         <span  
                         key = {index}
                         id = {index}> {request.comment }</span>
+                        </h6>
+                    </Grid.Column>
+                    <Grid.Column width={4}>
+                        <h6>
+                        <span  
+                        key = {index}
+                        id = {index}> {request.doctor }</span>
+                        </h6>
+                    </Grid.Column>
+                    <Grid.Column width={4}>
+                        <h6>
+                        <span  
+                        key = {index}
+                        id = {index}> {request.hospital }</span>
                         </h6>
                     </Grid.Column>
                 </Grid>
@@ -92,23 +128,55 @@ class Comments extends Component
 
     render()
     {
-
-        // console.log(this.props.address)
-        console.log(this.props.requests)
-
         return(
             <Layout>
                 <Grid>
+                    <Grid.Column width={3}>
+                        <Header as='h3'>Time</Header>
+                    </Grid.Column>
+                    <Grid.Column width={3}>
+                        <Header as='h3'>Disease</Header>
+                    </Grid.Column>
+                    <Grid.Column width={3}>
+                        <Header as='h3'>Doctor</Header>
+                    </Grid.Column>
+                    <Grid.Column width={3}>
+                        <Header as='h3'>Hospital Name</Header>
+                    </Grid.Column>
+                </Grid>
+                <Grid>
                     <Grid.Column width={12}>
-                        { this.renderRows() }
+        
+                        <div id="myData">
+                            { this.renderRows() }
+                        </div>
+                    
                     </Grid.Column>
                     <Grid.Column width={4}>
                         <Form onSubmit={this.handleSubmit}>
                             <Form.Field>
-                                <label>Enter comment for the patient</label>
-                                <Input type="text" value={this.state.value} onChange={this.handleChange} />
+                                <h5>Enter comment for the patient</h5>
+                                <Input type="text" value={this.state.value} onChange={this.handleChange1} />
                             </Form.Field>
-                            <Button>Add Report</Button>
+                            <Form.Field>
+                                <h5>Scan Doctor's Aadhaar Card</h5>
+                                <Input type="text" value={this.state.doctor} onChange={this.handleChange2} disabled="disabled" />
+                            </Form.Field>
+                            <Form.Field>
+                                <h5>Enter Hospital Name</h5>
+                                <Input type="text" value={this.state.hospital} onChange={this.handleChange3} />
+                            </Form.Field>
+                            <Icon name="plus"/>
+                            <Button color="green">Add Report</Button>
+                        </Form>
+                        <br></br>
+                        <Form onSubmit={this.myFun}>
+                            <Icon name="print"/>
+                            <Button>Print the page</Button>
+                        </Form><br></br>
+                        <Form onSubmit={this.openUrl}>
+                            <Icon name="sign-out"/>
+                            <Button color='red'>LogOut</Button>
                         </Form>
                     </Grid.Column>
                 </Grid>
@@ -118,6 +186,13 @@ class Comments extends Component
             </Layout>
         );
     }
+    myFun() {
+        window.print();
+    }
+    openUrl(){
+        
+        window.location.href="http://localhost:5000/";
+        firebase.database().ref().update({"value":" "});
+    }
 }
-
 export default Comments;

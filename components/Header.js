@@ -6,11 +6,11 @@ export default () => {
 
     return (
         <div>
-            <br/>
         <Header as='h2' icon textAlign='center'>
-            <Icon name='universal access' circular />
-            
-           <Header.Content>Medical History</Header.Content>
+            <br></br>
+            <Icon name='hospital symbol' circular />
+           <Header.Content>Indian Med-History</Header.Content>
+           <br></br>
         </Header>
         </div>
     );

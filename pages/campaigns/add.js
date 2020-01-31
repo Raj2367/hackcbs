@@ -124,9 +124,9 @@ class RequestNew extends Component {
         return (
             <Layout>
                 <Grid>
-                    <Grid.Column width={11}>
-                        {/* {this.renderRows()} */}
-                        {/* <Map
+                    {/* <Grid.Column width={11}>
+                        {this.renderRows()} }
+                        { <Map
                             google={this.props.google}
                             zoom={8}
                             style={{
@@ -136,24 +136,26 @@ class RequestNew extends Component {
                             initialCenter={{ lat: 47.444, lng: -122.176}}
                         >
                         {this.displayMarkers()}
-                        </Map> */}
-                        <CurrentLocation
-                                centerAroundCurrentLocation
-                                google={this.props.google}       
-                        >
-                            <Marker onClick={this.onMarkerClick} name={'current location'} />
-                            <InfoWindow
-                            marker={this.state.activeMarker}
-                            visible={this.state.showingInfoWindow}
-                            onClose={this.onClose}
-                            >
-                            <div>
-                                {/* <h4>{this.state.selectedPlace.name}</h4> */}
-                                <h6>current location</h6>
-                            </div>
-                            </InfoWindow>
-                        </CurrentLocation>
-                    </Grid.Column>
+                        </Map>
+                        // <CurrentLocation
+                        //         centerAroundCurrentLocation
+                        //         google={this.props.google}       
+                        // >
+                        //     <Marker onClick={this.onMarkerClick} name={'current location'} />
+                        //     <InfoWindow
+                        //     marker={this.state.activeMarker}
+                        //     visible={this.state.showingInfoWindow}
+                        //     onClose={this.onClose}
+                        //     >
+                        //     <div>
+                        //         {/* <h4>{this.state.selectedPlace.name}</h4> }
+                        //         <h6>current location</h6>
+                        //     </div>
+                        //     </InfoWindow>
+                        // </CurrentLocation>
+                        }
+                    </Grid.Column> 
+                    */}
 
                     <Grid.Column width={5}>
                         <h3>Book Cab</h3>
@@ -195,7 +197,7 @@ class RequestNew extends Component {
                 </Grid>
 
                 <Dimmer active={this.state.loading} inverted>
-                    <Loader size='large'>Searching for cabs</Loader>
+                    <Loader size='large'>Adding Patient</Loader>
                 </Dimmer>
             </Layout>
         );
