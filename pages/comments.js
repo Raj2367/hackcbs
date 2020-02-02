@@ -32,8 +32,12 @@ class Comments extends Component
     constructor(props) {
         super(props);
         this.state = {value: '', doctor:'', hospital:'',loading: false};
-        
-        firebase.database().ref().update({"value":" "});
+        try{
+            firebase.database().ref().update({"value":" "});
+        }catch(err)
+        {
+            console.log(err);
+        }
         this.handleChange1 = this.handleChange1.bind(this);
         this.handleChange2 = this.handleChange2.bind(this);
         this.handleChange3 = this.handleChange3.bind(this);
@@ -42,17 +46,21 @@ class Comments extends Component
 
     
   componentDidMount()
+  { 
+        firebase.database().ref().child('value').on('value',snap =>{
+        this.setState({
+            doctor: snap.val()
+        });
+        this.changedValueDoctor()
+        });
+  }
+
+  changedValueDoctor()
   {
-   
-    firebase.database().ref().child('value').on('value',snap =>{
-      this.setState({
-        doctor: snap.val()
-      });
-      var uid = this.state.doctor.substring(this.state.doctor.indexOf("name=\""),this.state.doctor.indexOf("\" gender="));
-      var uid2=uid.substring(6);
-      
-      this.setState({doctor:uid2});
-    });
+    var uid = this.state.doctor.substring(this.state.doctor.indexOf("name=\""),this.state.doctor.indexOf("\" gender="));
+    var uid2=uid.substring(6);
+    
+    this.setState({doctor:uid2});
   }
 
 
@@ -89,7 +97,6 @@ class Comments extends Component
           console.log(err);
         }      
       }
-
     renderRows() {
         return this.props.requests.map((request, index) => {
             return (
@@ -159,8 +166,8 @@ class Comments extends Component
                                 <Input type="text" value={this.state.value} onChange={this.handleChange1} />
                             </Form.Field>
                             <Form.Field>
-                                <h5>Scan Doctor's Aadhaar Card</h5>
-                                <Input type="text" value={this.state.doctor} onChange={this.handleChange2} disabled="disabled" />
+                                <h5>Scan Doctor's Aadhaar Card</h5><div style={{opacity:"1"}}>
+                                <Input type="text" value={this.state.doctor} onChange={this.handleChange2}/></div>
                             </Form.Field>
                             <Form.Field>
                                 <h5>Enter Hospital Name</h5>

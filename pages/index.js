@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Card, Button, Input, Form ,Grid,Dimmer,Loader} from 'semantic-ui-react';
-import Campaign from '../ethereum/patientFactory';
+import { Button, Input, Form ,Dimmer,Loader, Icon} from 'semantic-ui-react';
 import factory from '../ethereum/factory';
 import Layout from '../components/Layout';
-import { Link } from '../routes';
 import web3 from '../ethereum/web3';
 import { Router } from '../routes';
 import firebase from 'firebase';
 import {DB_CONFIG} from './Config';
 import { Carousel, Container, Row, Col} from 'react-bootstrap';
+
+
 
 const divStyle = {
   width: `600px`,
@@ -17,6 +17,7 @@ const divStyle = {
 const imgStyle = {
   height: `400px`
 }
+
 
 class CampaignIndex extends Component {
 
@@ -33,14 +34,15 @@ class CampaignIndex extends Component {
     
     this.state = {
       value: '',
-      loading:false
+      loading:false,
+      loading2:true
     };
 
     
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePush = this.handlePush.bind(this);
-    this.handleCheck = this.handleCheck.bind(this);
+    this.handleCheck = this.handleCheck.bind(this); 
   }
 
   componentDidMount()
@@ -54,6 +56,15 @@ class CampaignIndex extends Component {
       var uid2=uid.substring(5);
       
       this.setState({value:uid2});
+    });
+
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
+      .then(response => response.json())
+      .then(json => {
+        setState({ loading2: false });
+      })
+      .catch(err => {
+        setState({ loading2: false });
     });
   }
 
@@ -87,8 +98,6 @@ handlePush = async (item) => {
     const account = await web3.eth.getAccounts();
     this.setState({loading: true});
     
-    //console.log(account[0]);
-
     try {
           
         const newPat = await factory.methods
@@ -103,6 +112,8 @@ handlePush = async (item) => {
 
           console.log(newPat);
           console.log(address);
+
+
           this.setState({loading: false});
           Router.pushRoute(`/campaigns/${address}/dashboard`);
 
@@ -113,7 +124,6 @@ handlePush = async (item) => {
   } else {
 
     let address = ''
-    
     for( let i=0;i<this.props.patientsIds.length;i++) {
       if(this.props.patientsIds[i] === item) {
         console.log(i);
@@ -128,31 +138,17 @@ handlePush = async (item) => {
 
 handleCheck(val) {
   return this.props.patientsIds.some(item => val === item);
- }
-
+}
     render() {
 
       return (
       <Layout>
         <Container>
           <Row>
-          <Col xs={6} md={6}>
-          <Form onSubmit={this.handleSubmit}>
-                <Form.Field>
-                  <br></br>
-                  <br></br>
-                  <br></br>
-                  <label>To know your history scan the adhaar and click Submit</label> 
-                  <label color="red"> Or</label>
-                  <label>You can manually enter your Aadhar card number:</label>
-                  <Input type="text" value={this.state.value} onChange={this.handleChange}/>
-                </Form.Field>
-                <Button size="small" color="green"> Submit </Button>
-            </Form>
-          </Col>
-          <Col xs={12} md={6}>
+          
+          <Col sm>
                             <div style={divStyle}>
-                                <Carousel interval={3000} fade={true} controls={false}>
+                                <Carousel interval={1000} fade={true} controls={false}>
                                     <Carousel.Item>
                                         <img style={imgStyle}
                                             className="d-block w-100"
@@ -172,29 +168,61 @@ handleCheck(val) {
                                     <Carousel.Item>
                                         <img style={imgStyle}
                                             className="d-block w-100"
-                                            src="https://images.unsplash.com/photo-1576091358783-a212ec293ff3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                                            src="https://legaldesire.com/wp-content/uploads/2019/06/shutterstock_590636858.jpg"
                                             alt="Third slide"
+                                        />
+                                    </Carousel.Item>
+
+                                    <Carousel.Item>
+                                        <img style={imgStyle}
+                                            className="d-block w-100"
+                                            src="https://previews.123rf.com/images/espies/espies1903/espies190300389/119716701-group-of-indian-medical-doctors-male-and-female-standing-isolated-on-white-background-selective-focu.jpg"
+                                            alt="fourth slide"
+                                        />
+                                    </Carousel.Item>
+
+                                    <Carousel.Item>
+                                        <img style={imgStyle}
+                                            className="d-block w-100"
+                                            src="https://images.livemint.com/rf/Image-621x414/LiveMint/Period2/2019/01/01/Photos/Processed/imcbill-k1lC--621x414@LiveMint.jpg"
+                                            alt="fifth slide"
                                         />
                                     </Carousel.Item>
                                 </Carousel>
                             </div>
           </Col>
+          <Col sm>
+          <Form onSubmit={this.handleSubmit}>
+                <Form.Field>
+                  <br></br>
+                  <br></br>
+                  <h3><div style={{display: 'flex', justifyContent:'center'}}><Icon name='user' circular /></div></h3>
+                  <br></br>
+                  <div style={{display: 'flex', justifyContent:'center'}}><h4><Icon name="address card"/>Scan your Adhaar Card & Click Submit</h4> </div>
+                  <div style={{display: 'flex', justifyContent:'center'}}>Or</div>
+                  <div style={{display: 'flex', justifyContent:'center'}}><label><Icon name="pencil alternate"/>You can manually enter your Aadhar card number:</label></div>
+                  <br></br>
+                  <div style={{display: 'flex', justifyContent:'center'}}><Input type="text" value={this.state.value} onChange={this.handleChange}/></div>
+                </Form.Field>
+                <div style={{display: 'flex', justifyContent:'center'}}>
+                  <div class="ui icon buttons">
+                      <button class="ui button" style={{backgroundColor:"#47F63B"}}>Submit<i class="arrow alternate circle right icon"></i></button>
+                  </div>
+                </div>
+            </Form>
+          </Col>
+          
           <Dimmer active={this.state.loading} inverted>
               <Loader size='large'>Fetching Patients Data over Blockchain. Please Wait.</Loader>
           </Dimmer>
-          </Row>
+          </Row>          
         </Container>
       </Layout>
     );
   }
-  // myValue()
-  // {
-  //   var realValue = this.state.value;
-  //   console.log(realValue);
-  //   var uid = realValue.substring(realValue.indexOf("name=\""),realValue.indexOf("\" gender"));
-  //   var uid2=uid.substring(6);
-  //   console.log(uid2);
-  // }
 }
 
+
+
 export default CampaignIndex;
+
