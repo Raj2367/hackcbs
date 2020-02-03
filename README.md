@@ -19,4 +19,12 @@ How to use
 5. Now navigate to IndianMedHistory folder and open it with android studio
 6. Scan your Adhaar by the newly installed mobile app and submit the output in the web application.
 
+<a href="https://drive.google.com/file/d/1Ip9aX014TUQBPc_Me3gYDrV848xKreqs/view?usp=sharing"><img src="https://drive.google.com/file/d/1GPQHikHTQOq8r1gDeqzJKaU4gd6oaZ4I/view?usp=sharing" height="500"/></a>
+---
+<a href="https://drive.google.com/file/d/18GjKDPt4v5BNfeRs9q-awNadvfTj_1pa/view?usp=sharing"><img src="https://drive.google.com/file/d/1GPQHikHTQOq8r1gDeqzJKaU4gd6oaZ4I/view?usp=sharing" height="500"/></a>
+---
+<a href="https://drive.google.com/file/d/11myxtsXWoEDtB3-W_arSkMEFUQSoLqxf/view?usp=sharing"><img src="https://drive.google.com/file/d/11myxtsXWoEDtB3-W_arSkMEFUQSoLqxf/view?usp=sharing" height="500"/></a>
+
+
+
 Happy hacking :))
