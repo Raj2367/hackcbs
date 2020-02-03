@@ -20,13 +20,21 @@ How to use
 6. Install app in your smart phone
 7. Scan your Adhaar by the newly installed mobile app and click on "submit" the output in the web application.
 ---
-
-<img src="https://img.youtube.com/vi/KZL9G-RsU1s/maxresdefault.jpg" width="50%">(https://youtu.be/KZL9G-RsU1s)
-
+Install our app and scan your Aadhar card
+---
+<a href="https://imgflip.com/gif/3o14sh"><img src="https://i.imgflip.com/3o14sh.gif" title="made at imgflip.com" height=500/></a>
+---
+Submit scanned value to fetch your history
+------------------------------------------
+<a href="https://imgflip.com/gif/3o123q"><img src="https://i.imgflip.com/3o123q.gif" title="made at imgflip.com" width=500/></a>
+---
+Enter your new data and scan doctor's Aadhar card to get doctor's name
+----------------------------------------------------------------------
+<a href="https://imgflip.com/gif/3o12qq"><img src="https://i.imgflip.com/3o12qq.gif" title="made at imgflip.com" width=500/></a>
+---
+Can print the history and then logout
+---
+<a href="https://imgflip.com/gif/3o13e9"><img src="https://i.imgflip.com/3o13e9.gif" title="made at imgflip.com" width=500/></a>
 ---
 
-<img src="https://img.youtube.com/vi/mkiUPS07YvU/maxresdefault.jpg" width="50%">(https://youtu.be/mkiUPS07YvU)
-
----
-
-Happy hacking :))
+Happy hacking :) :)
