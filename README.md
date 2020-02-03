@@ -17,7 +17,8 @@ How to use
     - npm start 
 4. Open localhost:5000
 5. Now navigate to IndianMedHistory folder and open it with android studio
-6. Scan your Adhaar by the newly installed mobile app and submit the output in the web application.
+6. Install app in your smart phone
+7. Scan your Adhaar by the newly installed mobile app and click on "submit" the output in the web application.
 ---
 
 <img src="https://img.youtube.com/vi/KZL9G-RsU1s/maxresdefault.jpg" width="50%">(https://youtu.be/KZL9G-RsU1s)
