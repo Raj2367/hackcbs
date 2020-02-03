@@ -19,6 +19,7 @@ How to use
 5. Now navigate to IndianMedHistory folder and open it with android studio
 6. Install app in your smart phone
 7. Scan your Adhaar by the newly installed mobile app and click on "submit" the output in the web application.
+   (Before click on "submit" You have to install metamask browser extension)
 ---
 Install our app and scan your Aadhar card
 ---
